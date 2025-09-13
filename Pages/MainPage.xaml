@@ -46,7 +46,7 @@
                             <Label Text="{Binding Subject}"
                                    Grid.Column="1"
                                    Grid.Row="1" />
-                            <Label Text="{Binding AppointmentDate, StringFormat='{dd/MM/yyyy}'}"
+                            <Label Text="{Binding AppointmentDate, StringFormat='{}{0:dd/MM/yyyy}'}"
                                    Grid.Column="1"
                                    Grid.Row="2" />
                             <HorizontalStackLayout Grid.Column="1"
@@ -64,7 +64,8 @@
                                    Spacing="10">
                 <Button Text="Agregar Cita" 
                         Clicked="OnAddNewAppointment"/>
-                <Button Text="Eliminar Cita Seleccionada" />
+                <Button Text="Eliminar Cita Seleccionada"
+                        Command="{Binding DeleteAppointmentCommand}"/>
             </HorizontalStackLayout>
 
         </VerticalStackLayout>

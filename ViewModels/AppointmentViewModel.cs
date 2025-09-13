@@ -13,7 +13,7 @@ namespace AppointmentSimulator.ViewModels
         private string _subject = string.Empty;
 
         [ObservableProperty]
-        private DateOnly _appointmentDate;
+        private DateTime _appointmentDate = DateTime.Today;
 
         [ObservableProperty]
         private TimeSpan _startingTime;
@@ -33,6 +33,18 @@ namespace AppointmentSimulator.ViewModels
             if (GlobalData.Appointments.FirstOrDefault(a => a.AppointmentDate.Equals(AppointmentDate)) != null && GlobalData.Appointments.FirstOrDefault(a => a.StartingTime.Equals(StartingTime)) != null )
             {
                 await Shell.Current.DisplayAlert("Error", "An appointment already exists for this schedule.", "OK");
+                return;
+            }
+
+            if (StartingTime == EndingTime)
+            {
+                await Shell.Current.DisplayAlert("Error", "Starting time cannot be the same as ending time.", "OK");
+                return;
+            }
+
+            if ( EndingTime <= StartingTime )
+            {
+                await Shell.Current.DisplayAlert("Error", "Ending time cannot finish before its start", "OK");
                 return;
             }
 
